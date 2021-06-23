@@ -3,6 +3,8 @@
 SendMode Input
 SetWorkingDir, %A_ScriptDir%
 
+StringCaseSense, On
+
 ; Combining accents
 CapsLock &  \::Send {U+0300} ; Grave accent
 CapsLock &  /::Send {U+0301} ; Acute accent
@@ -35,9 +37,55 @@ CapsLock & s::
     case "nmodels": Send {U+22AD} ; Negated double turnstile
 
     ; Greek letters
-    case "lambda":  Send {U+03BB}
+    case "Alpha":   Send {U+0391}
+    case "Beta":    Send {U+0392}
+    case "Gamma":   Send {U+0393}
+    case "Delta":   Send {U+0394}
+    case "Epsilon": Send {U+0395}
+    case "Zeta":    Send {U+0396}
+    case "Eta":     Send {U+0397}
+    case "Theta":   Send {U+0398}
+    case "Iota":    Send {U+0399}
+    case "Kappa":   Send {U+039A}
+    case "Lambda":  Send {U+039B}
+    case "Mu":      Send {U+039C}
+    case "Nu":      Send {U+039D}
+    case "Xi":      Send {U+039E}
+    case "Omicron": Send {U+039F}
+    case "Pi":      Send {U+03A0}
+    case "Rho":     Send {U+03A1}
+    case "Sigma":   Send {U+03A3}
+    case "Tau":     Send {U+03A4}
+    case "Upsilon": Send {U+03A5}
+    case "Phi":     Send {U+03A6}
+    case "Chi":     Send {U+03A7}
+    case "Psi":     Send {U+03A8}
+    case "Omega":   Send {U+03A9}
+    case "alpha":   Send {U+03B1}
+    case "beta":    Send {U+03B2}
+    case "gamma":   Send {U+03B3}
+    case "delta":   Send {U+03B4}
     case "epsilon": Send {U+03B5}
+    case "zeta":    Send {U+03B6}
+    case "eta":     Send {U+03B7}
+    case "theta":   Send {U+03B8}
+    case "iota":    Send {U+03B9}
+    case "kappa":   Send {U+03BA}
+    case "lambda":  Send {U+03BB}
+    case "mu":      Send {U+03BC}
+    case "nu":      Send {U+03BD}
+    case "xi":      Send {U+03BE}
+    case "omicron": Send {U+03BF}
     case "pi":      Send {U+03C0}
+    case "rho":     Send {U+03C1}
+    case "sigma2":  Send {U+03C2}
+    case "sigma":   Send {U+03C3}
+    case "tau":     Send {U+03C4}
+    case "upsilon": Send {U+03C5}
+    case "phi":     Send {U+03C6}
+    case "chi":     Send {U+03C7}
+    case "psi":     Send {U+03C8}
+    case "omega":   Send {U+03C9}
 
     ; Hacky stuff relating to BiDi
     case "lre": Send {U+202A} ; Left-to-right embedding
