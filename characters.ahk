@@ -8,8 +8,9 @@ StringCaseSense, On
 ; Combining accents
 CapsLock &  \::Send {U+0300} ; Grave accent
 CapsLock &  /::Send {U+0301} ; Acute accent
-CapsLock &  '::Send {U+0302} ; Circumflex accent
-CapsLock & `;::Send {U+0306} ; Breve accent
+CapsLock &  [::Send {U+0302} ; Circumflex accent
+CapsLock & `::Send {U+0303} ; Tilde accent
+CapsLock & ]::Send {U+0306} ; Breve accent
 
 ; Custom (LaTeX-like) inputs
 ; After doing the hotkey, keep typing what you want, then press Tab, space or period to paste the special character
@@ -31,6 +32,8 @@ CapsLock & s::
     case "true":    Send {U+22A4}
     case "false":   Send {U+22A5}
     case "neq":     Send {U+2260} ; Not equal
+    case "approx":  Send {U+2248} ; Approx equal
+    case "in":      Send {U+2208} ; Element of
     case "forall":  Send {U+2200} ; Upside down capital A
     case "exists":  Send {U+2203} ; Backwards capital E
     case "models":  Send {U+22A8} ; Double turnstile
@@ -88,6 +91,8 @@ CapsLock & s::
     case "omega":   Send {U+03C9}
 
     ; Hacky stuff relating to BiDi
+    case "lrm": Send {U+200E} ; Left-to-right mark
+    case "rlm": Send {U+200F} ; Right-to-left mark
     case "lre": Send {U+202A} ; Left-to-right embedding
     case "rle": Send {U+202B} ; Right-to-left embedding
     case "lro": Send {U+202D} ; Left-to-right override
@@ -101,7 +106,46 @@ CapsLock & s::
     case "highsurr": Send {U+D800} ; High surrogate
     case "lowsurr": Send {U+DC00} ; Low surrogate
     case "zwsp": Send {U+200B} ; Zero-width space
+    case "lf": Send {U+000A} ; Line-feed
+    case "cr": Send {U+000D} ; Carriage return
 
     default: Send, _ ; _ to differentiate from applications replacing unknown characters with '?'
+    }
+return
+
+; Custom linguistics IPA symbols
+CapsLock & l::
+    Input, value, V, {tab} .
+
+    length := StrLen(value) + 1 ; +1 to account for the end key
+    Send {backspace %length%}
+
+    switch value
+    {
+    case "ae":  Send {U+00E6} ; Ash character (æ)
+    case "eth": Send {U+00F0} ; Eth character (ð)
+    case "a\":  Send {U+0250} ; Turned a (ɐ)
+    case "aa":  Send {U+0251} ; Open a (ɑ)
+    case "aa\": Send {U+0252} ; Open a turned (ɒ)
+    case "c\":  Send {U+0254} ; Turned c (ɔ)
+    case "e\":  Send {U+0259} ; Turned e / schwa (ə)
+    case "3\":  Send {U+025B} ; Epsilon / turned 3 (ɛ)
+    case "I":   Send {U+026A} ; Small caps I (ɪ)
+    case "r\":  Send {U+0279} ; Turned r (ɹ)
+    case "R\":  Send {U+0281} ; Turned small-caps r (ʁ)
+    case "sh":  Send {U+0283} ; shh sound (ʃ)
+    case "v\":  Send {U+028C} ; Turned V / wedge (ʌ)
+    case "uu":  Send {U+028A} ; Horseshoe u / inverted omega (ʊ)
+    case "w\":  Send {U+028D} ; Turned w (ʍ)
+    case "3":   Send {U+0292} ; Ezh (ʒ)
+    case "?":   Send {U+0294} ; Glottal stop (ʔ)
+    case ":":   Send {U+02D0} ; Phone length indicator (ː)
+    case "ng":  Send {U+014B} ; Nasal n / n with j tail (ŋ)
+    case "^h":  Send {U+02B0} ; Superscript h / aspirated (ʰ)
+
+    case "'": Send {U+02C8} ; Primary stress
+    case ",": Send {U+02CC} ; Secondary stress
+
+    default: Send, _
     }
 return
