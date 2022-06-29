@@ -140,8 +140,9 @@ CapsLock & l::
     case "3":   Send {U+0292} ; Ezh (ʒ)
     case "?":   Send {U+0294} ; Glottal stop (ʔ)
     case ":":   Send {U+02D0} ; Phone length indicator (ː)
-    case "ng":  Send {U+014B} ; Nasal n / n with j tail (ŋ)
+    case "ng":  Send {U+014B} ; Velar nasal / n with right tail (ŋ)
     case "^h":  Send {U+02B0} ; Superscript h / aspirated (ʰ)
+    case "^j":  Send {U+02B2} ; Superscript j / palatalized (ʲ)
 
     case "'": Send {U+02C8} ; Primary stress
     case ",": Send {U+02CC} ; Secondary stress
