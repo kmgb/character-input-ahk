@@ -6,9 +6,9 @@ SetWorkingDir, %A_ScriptDir%
 StringCaseSense, On
 
 ; Combining accents
-CapsLock &  \::Send {U+0300} ; Grave accent
-CapsLock &  /::Send {U+0301} ; Acute accent
-CapsLock &  [::Send {U+0302} ; Circumflex accent
+CapsLock & \::Send {U+0300} ; Grave accent
+CapsLock & /::Send {U+0301} ; Acute accent
+CapsLock & [::Send {U+0302} ; Circumflex accent
 CapsLock & `::Send {U+0303} ; Tilde accent
 CapsLock & ]::Send {U+0306} ; Breve accent
 
@@ -24,20 +24,35 @@ CapsLock & s::
     switch value
     {
     ; Math and logic
-    case "imp":     Send {U+2192} ; Implies arrow
-    case "iff":     Send {U+2194} ; If and only if arrow
-    case "neg":     Send {U+00AC} ; Negation
-    case "and":     Send {U+2227} ; Logical conjunction
-    case "or":      Send {U+2228} ; Logical disjunction
-    case "true":    Send {U+22A4}
-    case "false":   Send {U+22A5}
-    case "neq":     Send {U+2260} ; Not equal
-    case "approx":  Send {U+2248} ; Approx equal
-    case "in":      Send {U+2208} ; Element of
-    case "forall":  Send {U+2200} ; Upside down capital A
-    case "exists":  Send {U+2203} ; Backwards capital E
-    case "models":  Send {U+22A8} ; Double turnstile
-    case "nmodels": Send {U+22AD} ; Negated double turnstile
+    case "neg":         Send {U+00AC} ; ¬ Negation
+    case "times":       Send {U+00D7} ; × Multiplication / cross product
+    case "forall":      Send {U+2200} ; ∀ Upside down capital A
+    case "partial":     Send {U+2202} ; ∂ Partial derivative symbol
+    case "exists":      Send {U+2203} ; ∃ Backwards capital E
+    case "empty":       Send {U+2205} ; ∅ Empty set symbol
+    case "nabla":       Send {U+2207} ; ∇ Vector differential
+    case "in":          Send {U+2208} ; ∈ Element of
+    case "infty":       Send {U+221E} ; ∞ Infinity symbol
+    case "and":         Send {U+2227} ; ∧ Logical conjunction
+    case "or":          Send {U+2228} ; ∨ Logical disjunction
+    case "int":         Send {U+222B} ; ∫ Integral
+    case "iint":        Send {U+222C} ; ∬ Double integral
+    case "iiint":       Send {U+222D} ; ∭ Triple integral
+    case "oint":        Send {U+222E} ; ∮ Closed integral
+    case "oiint":       Send {U+222F} ; ∯ Closed double integral
+    case "oiiint":      Send {U+2230} ; ∰ Closed triple integral
+    case "therefore":   Send {U+2234} ; ∴ Therefore symbol
+    case "because":     Send {U+2235} ; ∵ Since symbol
+    case "approx":      Send {U+2248} ; ≈ Approx equal
+    case "neq":         Send {U+2260} ; ≠ Not equal
+    case "equiv":       Send {U+2261} ; ≡ Equivalence operator
+    case "true":        Send {U+22A4} ; ⊤ Truth symbol
+    case "false":       Send {U+22A5} ; ⊥ Falsity symbol
+    case "models":      Send {U+22A8} ; ⊨ Double turnstile
+    case "nmodels":     Send {U+22AD} ; ⊭ Negated double turnstile
+    case "cdot":        Send {U+22C5} ; ⋅ Dot product operator
+    case "imp":         Send {U+27F9} ; ⟹ Implies arrow
+    case "iff":         Send {U+27FA} ; ⟺ If and only if arrow
 
     ; Greek letters
     case "Alpha":   Send {U+0391}
@@ -90,7 +105,29 @@ CapsLock & s::
     case "psi":     Send {U+03C8}
     case "omega":   Send {U+03C9}
 
-    ; Hacky stuff relating to BiDi
+    ; Superscript / Subscript
+    case "^0": Send {U+2070}
+    case "^1": Send {U+2071}
+    case "^2": Send {U+2072}
+    case "^3": Send {U+2073}
+    case "^4": Send {U+2074}
+    case "^5": Send {U+2075}
+    case "^6": Send {U+2076}
+    case "^7": Send {U+2077}
+    case "^8": Send {U+2078}
+    case "^9": Send {U+2079}
+    case "_0": Send {U+2080}
+    case "_1": Send {U+2081}
+    case "_2": Send {U+2082}
+    case "_3": Send {U+2083}
+    case "_4": Send {U+2084}
+    case "_5": Send {U+2085}
+    case "_6": Send {U+2086}
+    case "_7": Send {U+2087}
+    case "_8": Send {U+2088}
+    case "_9": Send {U+2089}
+
+    ; BiDirectional unicode markers
     case "lrm": Send {U+200E} ; Left-to-right mark
     case "rlm": Send {U+200F} ; Right-to-left mark
     case "lre": Send {U+202A} ; Left-to-right embedding
@@ -102,12 +139,15 @@ CapsLock & s::
     case "rli": Send {U+2067} ; Right-to-left isolate
     case "pdi": Send {U+2069} ; Pop directional isolate, applies to Isolate
 
-    ; Hacky stuff misc
-    case "highsurr": Send {U+D800} ; High surrogate
-    case "lowsurr": Send {U+DC00} ; Low surrogate
-    case "zwsp": Send {U+200B} ; Zero-width space
-    case "lf": Send {U+000A} ; Line-feed
-    case "cr": Send {U+000D} ; Carriage return
+    ; Misc
+    case "highsurr":    Send {U+D800} ; High surrogate
+    case "lowsurr":     Send {U+DC00} ; Low surrogate
+    case "zwsp":        Send {U+200B} ; Zero-width space
+    case "lf":          Send {U+000A} ; Line-feed
+    case "cr":          Send {U+000D} ; Carriage return
+
+    case "--":       Send {U+2014} ; Em dash
+    case "---":      Send {U+2E3B} ; Three-em dash
 
     default: Send, _ ; _ to differentiate from applications replacing unknown characters with '?'
     }
