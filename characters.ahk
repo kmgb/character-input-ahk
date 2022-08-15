@@ -5,6 +5,15 @@ SetWorkingDir, %A_ScriptDir%
 
 StringCaseSense, On
 
+; Disable CapsLock due to annoying accidental activations when using this script
+; Ctrl-CapsLock can still be used if needed
+SetCapsLockState, off
+*CapsLock::
+return
+
+; Override the disable with Ctrl+CapsLock
+^CapsLock::SetCapsLockState % !GetKeyState("CapsLock", "T")
+
 ; Combining accents
 CapsLock & \::Send {U+0300} ; Grave accent
 CapsLock & /::Send {U+0301} ; Acute accent
@@ -13,13 +22,26 @@ CapsLock & `::Send {U+0303} ; Tilde accent
 CapsLock & ]::Send {U+0306} ; Breve accent
 
 ; Custom (LaTeX-like) inputs
-; After doing the hotkey, keep typing what you want, then press Tab, space or period to paste the special character
-; The key that will work as an 'end-key' will depend on the application, but period tends to work most often
+; After doing the hotkey, keep typing what you want, then press space or tab to input the special character.
+; The key that will work as an 'end-key' will depend on the application, but space tends to work most often.
 CapsLock & s::
-    Input, value, V, {tab} .
+    Input, value, V, {Space}{Tab}{Esc}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}{AppsKey}{F1}{F2}{F3}{F4}{F5}{F6}{F7}{F8}{F9}{F10}{F11}{F12}{Left}{Right}{Up}{Down}{Home}{End}{PgUp}{PgDn}{Del}{Ins}{NumLock}{PrintScreen}{Pause}
 
+    ; New Input has been started, cancel this one
+    if (ErrorLevel = "NewInput")
+    {
+        return
+    }
+
+    ; If any end key was pressed other than space or tab, cancel the operation
+    if (ErrorLevel != "EndKey:Space" and ErrorLevel != "EndKey:Tab")
+    {
+        return
+    }
+
+    ; Delete the text the user entered so we can replace it with the symbol
     length := StrLen(value) + 1 ; +1 to account for the end key
-    Send {backspace %length%}
+    Send {Backspace %length%}
 
     switch value
     {
@@ -33,8 +55,8 @@ CapsLock & s::
     case "nabla":       Send {U+2207} ; ∇ Vector differential
     case "in":          Send {U+2208} ; ∈ Element of
     case "infty":       Send {U+221E} ; ∞ Infinity symbol
-    case "and":         Send {U+2227} ; ∧ Logical conjunction
-    case "or":          Send {U+2228} ; ∨ Logical disjunction
+    case "land":        Send {U+2227} ; ∧ Logical conjunction
+    case "lor":         Send {U+2228} ; ∨ Logical disjunction
     case "int":         Send {U+222B} ; ∫ Integral
     case "iint":        Send {U+222C} ; ∬ Double integral
     case "iiint":       Send {U+222D} ; ∭ Triple integral
@@ -51,7 +73,7 @@ CapsLock & s::
     case "models":      Send {U+22A8} ; ⊨ Double turnstile
     case "nmodels":     Send {U+22AD} ; ⊭ Negated double turnstile
     case "cdot":        Send {U+22C5} ; ⋅ Dot product operator
-    case "imp":         Send {U+27F9} ; ⟹ Implies arrow
+    case "implies":     Send {U+27F9} ; ⟹ Implies arrow
     case "iff":         Send {U+27FA} ; ⟺ If and only if arrow
 
     ; Greek letters
@@ -155,10 +177,22 @@ return
 
 ; Custom linguistics IPA symbols
 CapsLock & l::
-    Input, value, V, {tab} .
+    Input, value, V, {Space}{Tab}{Esc}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}{AppsKey}{F1}{F2}{F3}{F4}{F5}{F6}{F7}{F8}{F9}{F10}{F11}{F12}{Left}{Right}{Up}{Down}{Home}{End}{PgUp}{PgDn}{Del}{Ins}{NumLock}{PrintScreen}{Pause}
+
+    ; New Input has been started, cancel this one
+    if (ErrorLevel = "NewInput")
+    {
+        return
+    }
+
+    ; If any end key was pressed other than space or tab, cancel the operation
+    if (ErrorLevel != "EndKey:Space" and ErrorLevel != "EndKey:Tab")
+    {
+        return
+    }
 
     length := StrLen(value) + 1 ; +1 to account for the end key
-    Send {backspace %length%}
+    Send {Backspace %length%}
 
     switch value
     {
